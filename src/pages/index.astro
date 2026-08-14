@@ -5,13 +5,33 @@ import Container from "@components/Container.astro";
 import AstroLogo from "@assets/images/astro-logo-light-gradient.png";
 import { Content as SampleMarkdown } from "@content/sample-markdown.md";
 import { Image } from "astro:assets";
+import LivingBooze from "@components/LivingBooze.astro";
 ---
 
 <Layout title="Astro Starter">
   <Container>
-    <Image src={AstroLogo} alt="" />
-    <h1>a simple Astro Starter Kit</h1>
-    <SampleComponent text="This is a sample component!" />
-    <SampleMarkdown />
+    <div class="body">
+
+      <div class="top">
+        
+<div class="intro">
+
+</div>
+
+<div class="music">
+
+</div>
+
+      </div>
+
+      <div class="middle">
+    <LivingBooze />
+      </div>
+
+      <div class="bottom">
+
+      </div>
+    
+    </div>
   </Container>
 </Layout>

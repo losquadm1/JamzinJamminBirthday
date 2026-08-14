@@ -1,0 +1,64 @@
+---
+const { title = "Night of the Living Booze" } = Astro.props;
+---
+
+<div class="living-booze">
+<img class="web" src="img/cornerweb.png" alt="">
+<img class="drink" src="img/skullbeer.png" alt="">
+<img class="daria" src="img/daria.png" alt="">
+  <h2>{title}</h2>
+  <br>
+  <p>November 13th 2026<br>7pm</p><br>
+  <p>@ MOON POOL HOUSE<br>(New Paltz)</p><br>
+  <p>RSVP on this google form?</p><br>
+  <p>Entry Fee: take a shot</p>
+  <br>
+</div>
+
+<style>
+  .web {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    margin-left: -10px;
+    margin-top: -35px;
+    display: block;
+  }
+
+  .drink {
+    position: absolute;
+    top: 215px;
+    right: 0;
+    width: 300px;
+    margin-right: -100px;
+    display: block;
+  }
+
+  .daria {
+    position: absolute;
+    top: -215px;
+    right: 0;
+    width: 300px;
+    display: block;
+    z-index: 2;
+  }
+
+  .living-booze {
+    position: relative;
+    border: 2px solid var(--color-accent);
+    background-color: rgba(56, 4, 83, 0.91);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .living-booze p,
+  .living-booze h2 {
+    text-align: center;
+  }
+</style>
