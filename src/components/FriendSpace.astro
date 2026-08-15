@@ -2,17 +2,20 @@
 const response = await fetch('https://script.google.com/macros/s/AKfycbx4OdhxMCBTw-soO8uRsmAxp8LQSylM9NPyRn_d_UadBCczUYMZQAOHef3gM4k33H3HCg/exec');
 const data = await response.json();
 const photos = data.photos || [];
+const number = photos.length;
 ---
 <div class=rsvp>
     
 <div class="title">
     <h3>paperdollspit's Friend Space</h3>
+    
 </div>
 
 <div class="people">
+    <p>paperdollspit has {number}<br>friends who RSVP'd</p>
 <section class="gallery">
   {photos.map((photo) => (
-    <img src={photo.url} alt={photo.name} />
+    <img src={photo.url} alt=""/>
   ))}
 </section>
 </div>
@@ -20,6 +23,17 @@ const photos = data.photos || [];
 </div>
 
 <style>
+
+p {
+    text-align: center;
+    font-family: var(--font-body);
+    color: var(--color-body);
+    font-size: 30px;
+    letter-spacing: normal;
+    font-weight: normal;
+    padding-bottom: 1rem;
+    line-height: 1.2;
+}
 
 h3 {
     text-align: center;
@@ -42,6 +56,7 @@ h3 {
         padding: 0px;
         width: 375px;
         text-align: center;
+        min-height: 765px;
     }
 
     .title {

@@ -18,7 +18,7 @@ const trackSrc = "/music/People Are Still Having Sex.mp3";
 
   <div class="volume-row">
     <label for="volume-slider" class="volume-label">Volume</label>
-    <input id="volume-slider" type="range" class="volume-slider" min="0" max="1" value="0.8" step="0.01" aria-label="Volume" />
+    <input id="volume-slider" type="range" class="volume-slider" min="0" max="1" value="0.5" step="0.01" aria-label="Volume" />
   </div>
 
   <audio id="audio-player" src={trackSrc} preload="metadata"></audio>
@@ -31,8 +31,18 @@ const trackSrc = "/music/People Are Still Having Sex.mp3";
   const volumeSlider = document.getElementById("volume-slider");
   const currentTimeEl = document.getElementById("current-time");
   const durationEl = document.getElementById("duration");
+  const volumeStorageKey = "jamzin-music-volume";
+  const pausedStorageKey = "jamzin-music-paused";
 
-  audio.volume = Number(volumeSlider.value);
+  const savedVolume = Number(localStorage.getItem(volumeStorageKey));
+  const savedPaused = localStorage.getItem(pausedStorageKey);
+  const initialVolume = Number.isFinite(savedVolume) && savedVolume >= 0 && savedVolume <= 1
+    ? savedVolume
+    : Number(volumeSlider.value);
+  const shouldPlay = savedPaused !== "true";
+
+  audio.volume = initialVolume;
+  volumeSlider.value = initialVolume;
 
   function formatTime(seconds) {
     if (!Number.isFinite(seconds)) return "0:00";
@@ -43,13 +53,15 @@ const trackSrc = "/music/People Are Still Having Sex.mp3";
     return `${mins}:${secs}`;
   }
 
-  playToggle.addEventListener("click", () => {
+  playToggle.addEventListener("click", async () => {
     if (audio.paused) {
-      audio.play();
-      playToggle.textContent = "Pause";
+      try {
+        await audio.play();
+      } catch {
+        playToggle.textContent = "Play";
+      }
     } else {
       audio.pause();
-      playToggle.textContent = "Play";
     }
   });
 
@@ -70,15 +82,24 @@ const trackSrc = "/music/People Are Still Having Sex.mp3";
 
   volumeSlider.addEventListener("input", (event) => {
     audio.volume = Number(event.target.value);
+    localStorage.setItem(volumeStorageKey, String(audio.volume));
   });
 
   audio.addEventListener("play", () => {
     playToggle.textContent = "Pause";
+    localStorage.setItem(pausedStorageKey, "false");
   });
 
   audio.addEventListener("pause", () => {
     playToggle.textContent = "Play";
+    localStorage.setItem(pausedStorageKey, "true");
   });
+
+  if (shouldPlay) {
+    audio.play().catch(() => {
+      playToggle.textContent = "Play";
+    });
+  }
 </script>
 
 <style>
