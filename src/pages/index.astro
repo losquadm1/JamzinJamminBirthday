@@ -12,6 +12,7 @@ import FriendSpace from "@components/FriendSpace.astro";
 ---
 
 <Layout title="Astro Starter">
+  <meta name="viewport" content="width=device-width, initial-scale=.485, maximum-scale=2, user-scalable=yes">
   <Container>
     <div class="body">
       
@@ -43,8 +44,12 @@ import FriendSpace from "@components/FriendSpace.astro";
 <div class="rsvp">
 <FriendSpace />
 </div>
+<div class="underbottom">
+ <img class="nana" src="img/nana.png">  
+</div>
       </div>
-    
+
+
     </div>
   </Container>
 </Layout>
@@ -53,18 +58,25 @@ import FriendSpace from "@components/FriendSpace.astro";
 
   body {
     background-image: url("/img/purplecheetah.jpg");
+    x-overflow: hidden;
   }
 
   .body {
     position: relative;
-    padding-right: 36px;
+    width: 800px;
+  }
+
+  @media (min-width: 850px) {
+    .body {
+      max-width: 800px;
+    }
   }
 
   .body::after {
     content: "";
     position: absolute;
     top: 0;
-    right: -100;
+    right: -50px;
     width: 125px;
     height: 100%;
     background-image: url("/img/blacklace.png");
@@ -75,7 +87,14 @@ import FriendSpace from "@components/FriendSpace.astro";
     z-index: -1;
   }
 
+  @media (max-width: 850px) {
+    .body::after {
+      position: fixed;
+      right: 0px
+    }
+  }
   .top {
+    padding-top: 1rem;
     width: 800px;
     display: flex;
     flex-direction: row;
@@ -88,7 +107,7 @@ import FriendSpace from "@components/FriendSpace.astro";
   
   .network {
     border: 2px solid var(--color-accent);
-    background-color: rgba(0, 0, 0, 0.91);
+    background-color: rgba(0, 0, 0, 0.8);
     padding: 15px;
     width: 375px;
     text-align: center;
@@ -96,11 +115,12 @@ import FriendSpace from "@components/FriendSpace.astro";
 
     .spotify {
     border: 2px solid var(--color-accent);
-    background-color: rgba(0, 0, 0, 0.91);
+    background-color: rgba(0, 0, 0, 0.8);
     padding: 15px;
     width: 375px;
     text-align: center;
-    font-size: 30px;}
+    font-size: 30px;
+    height: 265px;}
 
     .bottom {
       padding-top: 1rem;
@@ -108,8 +128,25 @@ import FriendSpace from "@components/FriendSpace.astro";
       flex-direction: row;
       justify-content: space-between;
       width: 800px;
+      padding-bottom: 1rem;
     }
 
+    .underbottom {
+      position: absolute;
+      width: 800px;
+      z-index: -1;
+      margin-top: 260px;
+    }
+
+    .nana {
+      object-fit: cover;
+      position: static;
+      bottom: 0;
+      margin-left: -60px;
+      z-index: -1;
+      transform: scaleX(-1);
+      width: 900px;
+    }
 
   .musicplayer {
     margin-top: 1rem;
