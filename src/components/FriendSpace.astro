@@ -1,0 +1,14 @@
+---
+const response = await fetch('https://script.google.com/macros/s/AKfycbzxN8QmQ379PQ8iZLWa6_31bknhwpD9NOGbP5Xlcm3HhLj_I7pr7xqCq6dGTmSu0c9N5A/exec');
+const data = await response.json();
+const photos = data.photos || [];
+---
+
+<section class="gallery">
+  {photos.map((photo) => (
+    <img src={photo.url} alt={photo.name} />
+  ))}
+</section>
+
+<img src="https://drive.usercontent.google.com/download?id=1vZOQK4iBIR10IkeP4QTLUMbK33EDK7UW&export=view&authuser=0">
+

@@ -8,6 +8,7 @@ import { Image } from "astro:assets";
 import LivingBooze from "@components/LivingBooze.astro";
 import Countdown from "@components/Countdown.astro";
 import MusicPlayer from "@components/musicplayer.astro";
+import FriendSpace from "@components/FriendSpace.astro";
 ---
 
 <Layout title="Astro Starter">
@@ -35,7 +36,13 @@ import MusicPlayer from "@components/musicplayer.astro";
       </div>
 
       <div class="bottom">
+<div class="spotify">
+  <p>Add ur fave party songs to this playlist:<br>spotify link<br><br>:P</p>
+</div>
 
+<div class="rsvp">
+<FriendSpace />
+</div>
       </div>
     
     </div>
@@ -43,6 +50,26 @@ import MusicPlayer from "@components/musicplayer.astro";
 </Layout>
 
 <style>
+  .body {
+    position: relative;
+    padding-right: 36px;
+  }
+
+  .body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -100;
+    width: 125px;
+    height: 100%;
+    background-image: url("/img/blacklace.png");
+    background-repeat: repeat-y;
+    background-position: top right;
+    background-size: 125px auto;
+    pointer-events: none;
+    z-index: -1;
+  }
+
   .top {
     width: 800px;
     display: flex;
@@ -61,6 +88,20 @@ import MusicPlayer from "@components/musicplayer.astro";
     width: 375px;
     text-align: center;
   }
+
+    .spotify {
+    border: 2px solid var(--color-accent);
+    background-color: rgba(0, 0, 0, 0.91);
+    padding: 15px;
+    width: 375px;
+    text-align: center;
+    font-size: 30px;}
+
+    .bottom {
+      padding-top: 1rem;
+    }
+
+
   .musicplayer {
     margin-top: 1rem;
   }
