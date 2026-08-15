@@ -6,22 +6,28 @@ import AstroLogo from "@assets/images/astro-logo-light-gradient.png";
 import { Content as SampleMarkdown } from "@content/sample-markdown.md";
 import { Image } from "astro:assets";
 import LivingBooze from "@components/LivingBooze.astro";
+import Countdown from "@components/Countdown.astro";
+import MusicPlayer from "@components/musicplayer.astro";
 ---
 
 <Layout title="Astro Starter">
   <Container>
     <div class="body">
-
+      
       <div class="top">
-        
 <div class="intro">
-
+<Countdown />
 </div>
 
 <div class="music">
-
+<br>
+<div class="network">
+  <p>paperdollspit is in your extended network</p>
 </div>
-
+<div class="musicplayer">
+<MusicPlayer />
+</div>
+</div>
       </div>
 
       <div class="middle">
@@ -35,3 +41,27 @@ import LivingBooze from "@components/LivingBooze.astro";
     </div>
   </Container>
 </Layout>
+
+<style>
+  .top {
+    width: 800px;
+    display: flex;
+    flex-direction: row;
+  }
+  .intro, .music {width: 375px;}
+
+  .music{
+    margin-left: 50px;
+  }
+  
+  .network {
+    border: 2px solid var(--color-accent);
+    background-color: rgba(0, 0, 0, 0.91);
+    padding: 15px;
+    width: 375px;
+    text-align: center;
+  }
+  .musicplayer {
+    margin-top: 1rem;
+  }
+</style>
