@@ -1,10 +1,6 @@
 ---
-const response = await fetch('https://script.google.com/macros/s/AKfycbzTcNhO1fQNqBdQ6E-V4uCJ6TwqgrZXwlcT-KK0a_LyVW_WG0WqMmJOTgLudq_R2jsHNQ/exec');
-const data = await response.json();
-const photos = data.photos || [];
-const number = photos.length;
 ---
-<div class=rsvp>
+<div class="rsvp" data-friend-space>
     
 <div class="title">
     <h3>paperdollspit's Friend Space</h3>
@@ -12,15 +8,50 @@ const number = photos.length;
 </div>
 
 <div class="people">
-    <p>paperdollspit has {number}<br>friends who RSVP'd</p>
-<section class="gallery">
-  {photos.map((photo) => (
-    <img src={photo.url} alt=""/>
-  ))}
+        <p>paperdollspit has <span data-photo-count>X</span><br>friends who RSVP'd</p>
+<section class="gallery" data-photo-gallery>
 </section>
+<p data-photo-status aria-live="polite">Loading photos...</p>
 </div>
 
 </div>
+
+<script>
+    const root = document.querySelector("[data-friend-space]");
+
+    if (root) {
+        const count = root.querySelector("[data-photo-count]");
+        const gallery = root.querySelector("[data-photo-gallery]");
+        const status = root.querySelector("[data-photo-status]");
+        const endpoint = "https://script.google.com/macros/s/AKfycbzTcNhO1fQNqBdQ6E-V4uCJ6TwqgrZXwlcT-KK0a_LyVW_WG0WqMmJOTgLudq_R2jsHNQ/exec";
+
+        fetch(endpoint, { cache: "no-store" })
+            .then((response) => {
+                if (!response.ok) throw new Error(`Request failed: ${response.status}`);
+                return response.json();
+            })
+            .then((data) => {
+                const photos = Array.isArray(data.photos)
+                    ? data.photos.filter((photo) => typeof photo.url === "string")
+                    : [];
+
+                count.textContent = String(photos.length);
+                gallery.replaceChildren(...photos.map((photo) => {
+                    const image = document.createElement("img");
+                    image.src = photo.url;
+                    image.alt = photo.name || "Friend photo";
+                    image.loading = "lazy";
+                    return image;
+                }));
+                status.hidden = photos.length > 0;
+                status.textContent = photos.length ? "" : "No photos yet.";
+            })
+            .catch((error) => {
+                console.error("Unable to load friend photos:", error);
+                status.textContent = "Photos couldn't load. Please refresh.";
+            });
+    }
+</script>
 
 <style>
 
@@ -43,9 +74,11 @@ h3 {
     letter-spacing: normal;
     font-weight: normal;}
 
-    img {
-        height: 150px;
+    /* Images are created at runtime, so scoped styles don't reach them. */
+    .gallery :global(img) {
         width: 150px;
+        height: 150px;
+        aspect-ratio: 1 / 1;
         margin-bottom: 1rem;
         object-fit: cover;
     }
