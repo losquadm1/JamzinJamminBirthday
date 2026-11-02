@@ -37,9 +37,9 @@ import FriendSpace from "@components/FriendSpace.astro";
 
       <div class="bottom">
 <div class="spotify">
-  <p>Add ur fave party songs to this playlist:<br>  
-<a href="https://open.spotify.com/playlist/5TAlrKRw0RlH6Mv6ruqvbI?si=fnJMoFhFS6amV_Zbtx6Ccw&utm_source=copy-link&pi=vrym_v4oRleq0&pt=91359873a5a062e05762aab9eb372b64">  <img src="/img/spinningcd.gif" alt=""> </a>
-<a href="https://open.spotify.com/playlist/5TAlrKRw0RlH6Mv6ruqvbI?si=fnJMoFhFS6amV_Zbtx6Ccw&utm_source=copy-link&pi=vrym_v4oRleq0&pt=91359873a5a062e05762aab9eb372b64">spotify link </a></p>
+<a href="https://open.spotify.com/playlist/5TAlrKRw0RlH6Mv6ruqvbI?si=fnJMoFhFS6amV_Zbtx6Ccw&utm_source=copy-link&pi=vrym_v4oRleq0&pt=91359873a5a062e05762aab9eb372b64"> <p>Add ur fave party songs to this playlist:<br> </p> </a>  
+<a class="spotify-img" href="https://open.spotify.com/playlist/5TAlrKRw0RlH6Mv6ruqvbI?si=fnJMoFhFS6amV_Zbtx6Ccw&utm_source=copy-link&pi=vrym_v4oRleq0&pt=91359873a5a062e05762aab9eb372b64">  <img src="/img/spinningcd.gif" alt=""> </a>
+
   </div>
 
 <div class="rsvp">
@@ -59,6 +59,9 @@ import FriendSpace from "@components/FriendSpace.astro";
 </Layout>
 
 <style>
+.spotify-img {
+  padding-top: 15px;
+}
 
 a {
     color: var(--color-accent);
@@ -138,7 +141,7 @@ a:focus-visible {
     width: 375px;
     text-align: center;
     font-size: 30px;
-    height: 485px;
+    height: 465px;
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -168,7 +171,7 @@ a:focus-visible {
       position: absolute;
       width: 800px;
       z-index: -1;
-      margin-top: 485px;
+      margin-top: 465px;
     }
 
     .nana {
