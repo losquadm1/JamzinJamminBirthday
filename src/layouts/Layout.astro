@@ -12,6 +12,11 @@ import Theme from "../global/Theme.astro";
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width" />
   <title>{title}</title>
+  <meta property="og:title" content={title} />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/img/jazmin.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="/img/jazmin.jpg" />
   <CSSReset />
   <Theme />
 </head>

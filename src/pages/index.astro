@@ -60,7 +60,28 @@ import FriendSpace from "@components/FriendSpace.astro";
 
 <style>
 .spotify-img {
+  position: relative;
   padding-top: 15px;
+}
+
+.spotify-img::before {
+  content: "";
+  position: absolute;
+  top: 52.5%;
+  left: 50%;
+  width: 7rem;
+  height: 4.8rem;
+  border-radius: 50%;
+  background: #00ff66;
+  filter: blur(2.25rem);
+  opacity: 1;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.spotify-img img {
+  position: relative;
+  z-index: 1;
 }
 
 a {
